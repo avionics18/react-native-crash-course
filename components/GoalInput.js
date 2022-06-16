@@ -16,7 +16,17 @@ export default function GoalInput({ addGoalHandler, isVisible, hideModal }) {
     }
 
     function onSubmitHandler() {
-        addGoalHandler(enteredGoalText);
+        if (enteredGoalText !== "") {
+            addGoalHandler(enteredGoalText);
+            hideModal();
+            setEneteredGoalText("");
+        } else {
+            console.log("Please enter a valid task!!!");
+        }
+    }
+
+    function onCancelHandler() {
+        hideModal();
         setEneteredGoalText("");
     }
 
@@ -25,7 +35,7 @@ export default function GoalInput({ addGoalHandler, isVisible, hideModal }) {
             <View style={styles.inputContainer}>
                 <Image
                     style={styles.image}
-                    source={require("../assets/favicon.png")}
+                    source={require("../assets/images/goal.png")}
                 />
                 <TextInput
                     style={styles.textInput}
@@ -43,9 +53,9 @@ export default function GoalInput({ addGoalHandler, isVisible, hideModal }) {
                     </View>
                     <View style={styles.button}>
                         <Button
-                            color="#710cf5"
+                            color="#f31282"
                             title="Cancel"
-                            onPress={hideModal}
+                            onPress={onCancelHandler}
                         />
                     </View>
                 </View>
@@ -60,15 +70,22 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         padding: 24,
+        backgroundColor: "#311b6b",
     },
     image: {
+        width: 100,
+        height: 100,
         marginBottom: 20,
     },
     textInput: {
         borderWidth: 1,
-        borderColor: "#cccccc",
+        borderColor: "rgba(255,255,255,0.3)",
+        backgroundColor: "#cbb8fc",
+        borderRadius: 6,
+        color: "#120438",
         width: "100%",
-        padding: 8,
+        paddingVertical: 8,
+        paddingHorizontal: 16,
     },
     buttonContainer: {
         flexDirection: "row",
